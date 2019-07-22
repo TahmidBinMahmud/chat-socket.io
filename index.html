@@ -16,8 +16,19 @@
 
 <script src="/socket.io/socket.io.js"></script>
 <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+
 <script>
     $(function () {
+        $('#m').on('keyup', function () {
+            var my_txt = $(this).val();
+            var len = my_txt.length;
+            if (len > 2) {
+                $('#sendBtn').prop('disabled', false)
+            }
+            else {
+                $('#sendBtn').prop('disabled', true)
+            }
+        });
         var socket = io();
         $('form').submit(function (e) {
             e.preventDefault(); // prevents page reloading
@@ -34,7 +45,7 @@
   <body>
     <ul id="messages"></ul>
     <form action="">
-      <input id="m" autocomplete="off" /><button>Send</button>
+      <input id="m" autocomplete="off" /><button id="sendBtn" disabled>Send</button>
     </form>
   </body>
 </html>
